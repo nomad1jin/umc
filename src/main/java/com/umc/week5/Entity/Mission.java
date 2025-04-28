@@ -22,7 +22,7 @@ public class Mission extends BaseEntity {
 
     private Integer reward;
 
-    private LocalDate deadline;
+//    private LocalDate deadline;
 
     private String missionSpec;
 
@@ -32,4 +32,14 @@ public class Mission extends BaseEntity {
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Mission{" +
+                "missionSpec=" + missionSpec +
+                ", reward=" + reward +
+                ", store=" + (store != null ? store.getId() : "null") +
+                '}';
+    }
+
 }
