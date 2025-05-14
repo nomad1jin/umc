@@ -1,6 +1,6 @@
 package com.umc.week5.mapping;
-import com.umc.week5.Entity.FoodCategory;
-import com.umc.week5.Entity.Member;
+import com.umc.week5.food.FoodCategory;
+import com.umc.week5.member.entity.Member;
 import com.umc.week5.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,4 +27,14 @@ public class MemberPrefer extends BaseEntity {
     @JoinColumn(name = "category_id")
     private FoodCategory foodCategory;
 
+    public void setMember(Member member){
+        if(this.member != null)
+            member.getMemberPreferList().remove(this);
+        this.member = member;
+        member.getMemberPreferList().add(this);
+    }
+
+    public void setFoodCategory(FoodCategory foodCategory){
+        this.foodCategory = foodCategory;
+    }
 }

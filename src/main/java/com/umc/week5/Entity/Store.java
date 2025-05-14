@@ -1,7 +1,8 @@
 package com.umc.week5.Entity;
 
 import com.umc.week5.common.BaseEntity;
-import com.umc.week5.mapping.MemberMission;
+import com.umc.week5.mission.Mission;
+import com.umc.week5.review.entity.Review;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,7 +1,7 @@
-package com.umc.week5.mission;
+package com.umc.week5.mission.repo;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.umc.week5.Entity.Mission;
+import com.umc.week5.mission.Mission;
 import com.umc.week5.Entity.QMission;
 import com.umc.week5.Entity.QRegion;
 import com.umc.week5.Entity.QStore;
@@ -11,11 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
-
-import static com.umc.week5.Entity.QMission.mission;
-import static com.umc.week5.Entity.QRegion.region;
-import static com.umc.week5.Entity.QStore.store;
 
 @Repository
 @RequiredArgsConstructor

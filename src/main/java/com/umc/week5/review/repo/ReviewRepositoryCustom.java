@@ -1,7 +1,6 @@
-package com.umc.week5.review;
+package com.umc.week5.review.repo;
 
-import com.umc.week5.Entity.Review;
-import com.umc.week5.Entity.Store;
+import com.umc.week5.review.entity.Review;
 
 import java.util.List;
 

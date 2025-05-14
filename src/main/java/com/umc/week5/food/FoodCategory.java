@@ -1,4 +1,4 @@
-package com.umc.week5.Entity;
+package com.umc.week5.food;
 
 import com.umc.week5.common.BaseEntity;
 import jakarta.persistence.*;

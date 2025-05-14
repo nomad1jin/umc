@@ -1,5 +1,6 @@
-package com.umc.week5.Entity;
+package com.umc.week5.member.entity;
 
+import com.umc.week5.review.entity.Review;
 import com.umc.week5.common.BaseEntity;
 import com.umc.week5.enums.Gender;
 import com.umc.week5.enums.MemberStatus;
@@ -9,6 +10,7 @@ import com.umc.week5.mapping.MemberMission;
 import com.umc.week5.mapping.MemberPrefer;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -47,9 +49,10 @@ public class Member extends BaseEntity {
 
     private LocalDate inactiveDate;
 
-    @Column(nullable = false, length = 50)
+//    @Column(nullable = false, length = 50)
     private String email;
 
+    @ColumnDefault("0")
     private Integer point;
 
     //양방향 매핑 1:N에서 1에 해당하는 엔티티에게 설정
@@ -60,8 +63,8 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberPrefer> memberPreferList = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-//    private List<Review> reviewList = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();

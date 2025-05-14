@@ -1,11 +1,11 @@
-package com.umc.week5.Entity;
+package com.umc.week5.mission;
 
+import com.umc.week5.Entity.Store;
 import com.umc.week5.common.BaseEntity;
 import com.umc.week5.mapping.MemberMission;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.umc.week5.mapping;
-import com.umc.week5.Entity.Member;
-import com.umc.week5.Entity.Mission;
-import com.umc.week5.Entity.Terms;
+import com.umc.week5.member.entity.Member;
+import com.umc.week5.mission.Mission;
 import com.umc.week5.common.BaseEntity;
 import com.umc.week5.enums.MissionStatus;
 import jakarta.persistence.*;

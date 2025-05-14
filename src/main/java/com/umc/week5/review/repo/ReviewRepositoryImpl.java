@@ -1,16 +1,14 @@
-package com.umc.week5.review;
+package com.umc.week5.review.repo;
 
-import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.umc.week5.Entity.*;
+import com.umc.week5.review.entity.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.umc.week5.Entity.QRegion.region;
 import static com.umc.week5.Entity.QReview.review;
-import static com.umc.week5.Entity.QStore.store;
 
 @Repository
 @RequiredArgsConstructor

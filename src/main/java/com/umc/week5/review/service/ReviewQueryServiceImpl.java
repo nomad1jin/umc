@@ -1,8 +1,8 @@
-package com.umc.week5.review;
+package com.umc.week5.review.service;
 
 
-import com.umc.week5.Entity.Review;
-import com.umc.week5.Entity.Store;
+import com.umc.week5.review.entity.Review;
+import com.umc.week5.review.repo.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

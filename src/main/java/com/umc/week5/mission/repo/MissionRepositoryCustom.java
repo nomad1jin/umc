@@ -1,10 +1,9 @@
-package com.umc.week5.mission;
+package com.umc.week5.mission.repo;
 
-import com.umc.week5.Entity.Mission;
+import com.umc.week5.mission.Mission;
 import com.umc.week5.enums.MissionStatus;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface MissionRepositoryCustom {
     List<Mission> findMissionsByMemberMissionStatus(MissionStatus status);

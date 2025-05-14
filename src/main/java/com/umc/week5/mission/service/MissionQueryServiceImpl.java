@@ -1,8 +1,9 @@
-package com.umc.week5.mission;
+package com.umc.week5.mission.service;
 
 
-import com.umc.week5.Entity.Mission;
+import com.umc.week5.mission.Mission;
 import com.umc.week5.enums.MissionStatus;
+import com.umc.week5.mission.repo.MissionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

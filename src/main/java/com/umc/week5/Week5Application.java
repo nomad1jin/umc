@@ -1,8 +1,8 @@
 package com.umc.week5;
 
 import com.umc.week5.enums.MissionStatus;
-import com.umc.week5.mission.MissionQueryService;
-import com.umc.week5.review.ReviewQueryService;
+import com.umc.week5.mission.service.MissionQueryService;
+import com.umc.week5.review.service.ReviewQueryService;
 import com.umc.week5.store.service.StoreQueryService;
 
 import org.springframework.boot.CommandLineRunner;
