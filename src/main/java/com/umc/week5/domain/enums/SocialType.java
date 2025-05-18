@@ -1,5 +1,5 @@
 package com.umc.week5.domain.enums;
 
 public enum SocialType {
-    KAKAO, GOOGLE, MAVER, APPLE
+    KAKAO, GOOGLE, NAVER, APPLE
 }

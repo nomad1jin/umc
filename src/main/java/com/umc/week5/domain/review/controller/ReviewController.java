@@ -1,19 +1,34 @@
 package com.umc.week5.domain.review.controller;
 
+import com.umc.week5.domain.review.ReviewConverter;
 import com.umc.week5.domain.review.dto.ReviewRequestDto;
+import com.umc.week5.domain.review.dto.ReviewResponseDto;
+import com.umc.week5.domain.review.entity.Review;
 import com.umc.week5.domain.review.service.ReviewCommandService;
+import com.umc.week5.domain.review.service.ReviewQueryService;
+import com.umc.week5.global.apiPayload.ApiResponse;
 import com.umc.week5.global.valid.StoreExists;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 @RequestMapping("/stores")
 public class ReviewController {
     private final ReviewCommandService reviewCommandService;
+    private final ReviewQueryService reviewQueryService;
 
     @PostMapping("/{storeId}/reviews")
     public ResponseEntity<String> addReview(
@@ -21,5 +36,25 @@ public class ReviewController {
             @RequestBody @Valid ReviewRequestDto requestDto) {
         reviewCommandService.addReview(storeId, requestDto);
         return ResponseEntity.ok("리뷰 등록 성공");
+    }
+
+    /// ///조회
+    @Operation(summary = "특정 가게의 리뷰 목록 조회 API",description = "특정 가게의 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
+    /// /아래를 수정하라
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH003", description = "access 토큰을 주세요!",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
+    })
+    @Parameters({
+            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!")
+    })
+    @GetMapping("/{storeId}/reviews")
+    public ApiResponse<ReviewResponseDto.ReviewPreViewListDTO> getReviewList(
+            @StoreExists @PathVariable(name = "storeId") Long storeId,
+            @RequestParam(name = "page") Integer page) {
+        Page<Review> reviewList = reviewQueryService.getReviewList(storeId, page);
+        return ApiResponse.onSuccess(ReviewConverter.toReviewListDto(reviewList));
     }
 }
