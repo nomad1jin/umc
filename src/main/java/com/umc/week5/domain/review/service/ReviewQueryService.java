@@ -11,4 +11,6 @@ public interface ReviewQueryService {
     List<Review> findall();
 
     Page<Review> getReviewList(Long storeId, Integer page);
+
+    Page<Review> getReviewMyList(Long userId, Integer page);
 }

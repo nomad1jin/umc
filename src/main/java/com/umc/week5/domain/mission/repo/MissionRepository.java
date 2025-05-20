@@ -10,4 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MissionRepository extends JpaRepository<Mission, Long>, MissionRepositoryCustom {
     boolean existsByIdAndMember_Id(Long id, Long memberId);
     Page<Mission> findAllByStore(Store store, PageRequest pageRequest);
+
+    Page<Mission> findAllMissionByMember_Id(Long memberId, PageRequest pageRequest);
 }

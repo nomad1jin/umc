@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewRepositoryCustom {
 
     Page<Review> findAllByStore(Store store, PageRequest pageRequest);
+
+    Page<Review> findAllReviewByMember_id(Long memberId, PageRequest pageRequest);
 }

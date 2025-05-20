@@ -47,12 +47,27 @@ public class MissionController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),})
     @Parameters({
             @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!")})
-    @GetMapping("/{storeId}")
+    @GetMapping("mission/{storeId}")
     public ApiResponse<MissionResponseDto.MissionPreViewListDTO> getMissionList(
             @PathVariable(name = "storeId") Long storeId,
             @RequestParam(name = "page") Integer page) {
         log.info("요청 도착: storeId={}, page={}", storeId, page);
         Page<Mission> missionList = missionQueryService.getMissionList(storeId, page);
+        return ApiResponse.onSuccess(MissionConverter.toMissionListDto(missionList));
+    }
+
+    @Operation(summary = "특정 유저의 진행중인 미션 목록 조회 API",description = "특정 유저의 진행중인 미션들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
+    /// /아래를 수정하라
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "COMMON200",description = "OK, 성공"),})
+    @Parameters({
+            @Parameter(name = "userId", description = "userId, path variable 입니다!")})
+    @GetMapping("mission/userId/{userId}")
+    public ApiResponse<MissionResponseDto.MissionPreViewListDTO> getMyMissionList(
+            @PathVariable(name = "userId") Long userId,
+            @RequestParam(name = "page") Integer page) {
+        log.info("요청 도착: userId={}, page={}", userId, page);
+        Page<Mission> missionList = missionQueryService.getMyMissionList(userId, page);
         return ApiResponse.onSuccess(MissionConverter.toMissionListDto(missionList));
     }
 }

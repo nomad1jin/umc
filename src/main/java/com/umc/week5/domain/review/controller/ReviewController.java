@@ -1,5 +1,8 @@
 package com.umc.week5.domain.review.controller;
 
+import com.umc.week5.domain.mission.MissionConverter;
+import com.umc.week5.domain.mission.dto.MissionResponseDto;
+import com.umc.week5.domain.mission.entity.Mission;
 import com.umc.week5.domain.review.ReviewConverter;
 import com.umc.week5.domain.review.dto.ReviewRequestDto;
 import com.umc.week5.domain.review.dto.ReviewResponseDto;
@@ -55,6 +58,14 @@ public class ReviewController {
             @StoreExists @PathVariable(name = "storeId") Long storeId,
             @RequestParam(name = "page") Integer page) {
         Page<Review> reviewList = reviewQueryService.getReviewList(storeId, page);
+        return ApiResponse.onSuccess(ReviewConverter.toReviewListDto(reviewList));
+    }
+
+    @GetMapping("/reviews/userId/{userId}")
+    public ApiResponse<ReviewResponseDto.ReviewPreViewListDTO> getMyMissionList(
+            @PathVariable(name = "userId") Long userId,
+            @RequestParam(name = "page") Integer page) {
+        Page<Review> reviewList = reviewQueryService.getReviewMyList(userId, page);
         return ApiResponse.onSuccess(ReviewConverter.toReviewListDto(reviewList));
     }
 }

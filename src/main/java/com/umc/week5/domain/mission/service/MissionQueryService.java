@@ -12,4 +12,7 @@ public interface MissionQueryService {
     List<Mission> findMissionsByMemberMissionStatus(MissionStatus status);
 
     Page<Mission> getMissionList(Long storeId, Integer page);
+
+    Page<Mission> getMyMissionList(Long userId, Integer page);
 }
+
