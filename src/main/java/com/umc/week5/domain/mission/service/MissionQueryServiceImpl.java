@@ -1,10 +1,15 @@
 package com.umc.week5.domain.mission.service;
 
 
+import com.umc.week5.domain.Entity.Store;
 import com.umc.week5.domain.mission.entity.Mission;
 import com.umc.week5.domain.enums.MissionStatus;
 import com.umc.week5.domain.mission.repo.MissionRepository;
+import com.umc.week5.domain.review.entity.Review;
+import com.umc.week5.domain.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +21,7 @@ import java.util.List;
 public class MissionQueryServiceImpl implements MissionQueryService {
 
     private final MissionRepository missionRepository;
+    private final StoreRepository storeRepository;
 
 
     @Override
@@ -26,5 +32,13 @@ public class MissionQueryServiceImpl implements MissionQueryService {
     @Override
     public List<Mission> findMissionsByMemberMissionStatus(MissionStatus status) {
         return missionRepository.findMissionsByMemberMissionStatus(status);
+    }
+
+    @Override
+    public Page<Mission> getMissionList(Long storeId, Integer page){
+        /// 일단 가게를 뽑아내서 가게에 해당하는 미션들을 뽑기
+        Store store = storeRepository.findById(storeId).get();
+        Page<Mission> MissionPage = missionRepository.findAllByStore(store, PageRequest.of(page, 5));
+        return MissionPage;
     }
 }
